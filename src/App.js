@@ -25,6 +25,7 @@ class App extends React.Component {
   }
 
   articleFilterOnChange = (e) => {
+    // set the state of searchTerm to use in filteredArticles()
     this.setState({
       searchTerm: e.target.value
     })
@@ -33,30 +34,35 @@ class App extends React.Component {
 
   filteredArticles = () => {
     // console.log("filteredArticles", this.state.articles, this.state.searchTerm)
-    
-    return (
-        this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+    console.log("here again", this.state.articles)
+  
+ // I am having trouble returning filter across multiple keys:
+//  a single key works:
+  //   return (
+  //     this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+  // )
+
+  // I believe I should be able to use || (((or syntax))) here:
+  return (
+    this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+    article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+    article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     )
+)
+ 
+// I thought I might be able to also implement an if statement here (((didn't work)))
     // if (this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
     //   return (this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())))
-    // } else 
-  
-    // if (this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
+    // } else if (this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
     //   return (this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase())))
     // }
-
-    // return (
-    //   this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())) || 
-    //   // this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase())) 
-    // )
    
   }
 
   render () {
-    // map over each article and render each to the dom in an <li>
-    // constorginalArticles = this.state.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())) 
-    let newFilteredArticles = this.filteredArticles()
     
+    let newFilteredArticles = this.filteredArticles()
+// map over each article and render each to the dom in an <li>
     const articles = newFilteredArticles.map(article => 
       <li>Title: {article.title}
       <br />
