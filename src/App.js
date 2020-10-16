@@ -64,10 +64,11 @@ class App extends React.Component {
     let newFilteredArticles = this.filteredArticles()
 // map over each article and render each to the dom in an <li>
     const articles = newFilteredArticles.map(article => 
-      <li>Title: {article.title}
+      <li><b>Title:</b><a href={article.url} > {article.title} </a>
       <br />
-      <p>Section: {article.section}</p>
-      <p>Byline: {article.byline}</p>
+      <p><b>Section:</b> {article.section}</p>
+      <p><b>Byline:</b> {article.byline}</p>
+      <h5>__________</h5>
       </li>
     )
     return (
@@ -75,10 +76,11 @@ class App extends React.Component {
         <div className="search-articles">
           Search:<input type="text" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
         </div> 
-        <br/>
+        <br/><br/>
        <div className="container">
          <ul>
            <li>{articles}</li>
+           <br />
            <br />
          </ul>
        </div>

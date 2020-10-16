@@ -1,5 +1,21 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To successfully get this Repo up and running:
 
+This application was built on 
+React version 16.14.0 
+This version of React is best used for functionality of app
+to update run: npm update --save react
+
+After version is updated 
+
+please run:
+
+npm install
+npm view react version
+npm start
+
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ## Available Scripts
 
 In the project directory, you can run:
