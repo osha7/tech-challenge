@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+
+  state = {
+    articles: [],
+    searchTerm: ""
+  }
+
+  componentDidMount = () => {
+    fetch("https://api.nytimes.com/svc/topstories/v2/science.json?api-key=Gwxln5M3geWlhR6UE0TY1FUWKSG3wCil")
+    .then(res => res.json())
+    // .then(data => console.log(data.results))
+    .then(data => {
+      // console.log("2nd", data)
+      this.setState({
+        articles: data.results
+      })
+    })
+  }
+
+  render () {
+    const articles = this.state.articles.map(article => 
+      <li>Title: {article.title}
+      <br />
+      <p>Section: {article.section}</p>
+      <p>Byline: {article.byline}</p>
+      </li>
+    )
+    return (
+      <div className="App">
+       <div className="container">
+         <ul>
+           <li>{articles}</li>
+           <br />
+         </ul>
+       </div>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
