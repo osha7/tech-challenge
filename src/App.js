@@ -49,14 +49,9 @@ class App extends React.Component {
     article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     )
 )
- 
-// I thought I might be able to also implement an if statement here (((didn't work)))
-    // if (this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
-    //   return (this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())))
-    // } else if (this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
-    //   return (this.state.articles.filter(article => article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase())))
-    // }
-   
+
+//   **** articles must be filtered no matter the position of words
+      // I believe I would need to remove the 'space' in the searchTerm and find a way to mimic the filtered result to accept this
   }
 
   render () {
