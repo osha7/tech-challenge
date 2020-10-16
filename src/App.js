@@ -51,8 +51,9 @@ class App extends React.Component {
 )
 
 //   **** articles must be filtered no matter the position of words
-      // I believe I would need to remove the 'space' in the searchTerm and find a way to mimic the filtered result to accept this
-  }
+// I believe that I would need actually take the searchTerm and .split the term to ensure that that both of the those words were included in the filter (probably using && in the second half of the filter statement)
+    
+      }
 
   render () {
     
