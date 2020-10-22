@@ -45,8 +45,8 @@ class App extends React.Component {
   // I believe I should be able to use || (((or syntax))) here:
   return (
     this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
-    article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
-    article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+      article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+      article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     )
 )
 
@@ -60,24 +60,22 @@ class App extends React.Component {
     let newFilteredArticles = this.filteredArticles()
 // map over each article and render each to the dom in an <li>
     const articles = newFilteredArticles.map(article => 
-      <li><b>Title:</b><a href={article.url} > {article.title} </a>
-      <br />
-      <p><b>Section:</b> {article.section}</p>
-      <p><b>Byline:</b> {article.byline}</p>
-      <h5>__________</h5>
+      <li>
+        <p><strong>Title:</strong><a href={article.url} > {article.title} </a></p>
+        <p><strong>Section:</strong> {article.section}</p>
+        <p><strong>Byline:</strong> {article.byline}</p>
+        <div aria-hidden="true">__________</div>
       </li>
     )
     return (
       <div className="App">
         <div className="search-articles">
-          Search:<input type="text" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
+          <label for="searchTerm">Search:</label><input type="search" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
         </div> 
         <br/><br/>
        <div className="container">
          <ul>
-           <li>{articles}</li>
-           <br />
-           <br />
+            {articles}
          </ul>
        </div>
       </div>
