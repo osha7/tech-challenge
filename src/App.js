@@ -72,12 +72,11 @@ class App extends React.Component {
         <div className="search-articles">
           <label for="searchTerm">Search:</label><input type="search" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
         </div> 
-        <br/><br/>
-       <div className="container">
-         <ul>
-            {articles}
-         </ul>
-       </div>
+        <div className="container">
+          <ul>
+              {articles}
+          </ul>
+        </div>
       </div>
     );
   }
