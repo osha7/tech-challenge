@@ -8,7 +8,8 @@ class App extends React.Component {
 
   state = {
     articles: [],
-    searchTerm: ""
+    searchTerm: "",
+    searchTerms: []
   }
 
   // arrow functions below bind this to class App
@@ -26,15 +27,21 @@ class App extends React.Component {
 
   articleFilterOnChange = (e) => {
     // set the state of searchTerm to use in filteredArticles()
+    console.log("articleFilterOnChange", e.target.value)
+    let values = e.target.value
+    let valuesSplit = values.split(" ")
+    console.log(valuesSplit)
     this.setState({
-      searchTerm: e.target.value
+      searchTerm: e.target.value,
+      searchTerms: valuesSplit
     })
+    console.log(this.state.searchTerms)
     this.filteredArticles()
   }
 
   filteredArticles = () => {
     // console.log("filteredArticles", this.state.articles, this.state.searchTerm)
-    console.log("here again", this.state.articles)
+    // console.log("here again", this.state.articles)
   
  // I am having trouble returning filter across multiple keys:
 //  a single key works:
@@ -48,19 +55,28 @@ class App extends React.Component {
       article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
       article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     )
-)
-
+  )
 //   **** articles must be filtered no matter the position of words
 // I believe that I would need actually take the searchTerm and .split the term to ensure that that both of the those words were included in the filter (probably using && in the second half of the filter statement)
-    
-      }
+//  new array in state of search term spli - and then loop over all values of array
+
+  // for (let i = 0; i < this.state.searchTerms.length; i++) {
+  // // console.log(this.state.searchTerms[i])
+  //   return(
+  //     this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
+  //       article.byline.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
+  //       article.section.toLowerCase().includes(this.state.searchTerms[i].toLowerCase())
+  //     )
+  //   )
+  // }
+}
 
   render () {
     
     let newFilteredArticles = this.filteredArticles()
 // map over each article and render each to the dom in an <li>
     const articles = newFilteredArticles.map(article => 
-      <li>
+      <li key={article.url}>
         <p><strong>Title:</strong><a href={article.url} > {article.title} </a></p>
         <p><strong>Section:</strong> {article.section}</p>
         <p><strong>Byline:</strong> {article.byline}</p>
@@ -70,7 +86,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="search-articles">
-          <label for="searchTerm">Search:</label><input type="search" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
+          <label htmlFor="searchTerm">Search:</label><input type="search" value={this.state.searchTerm} onChange={this.articleFilterOnChange} placeholder="Search Thru Articles"/>
         </div> 
         <div className="container">
           <ul>
