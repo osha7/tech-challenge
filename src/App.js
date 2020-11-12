@@ -50,31 +50,35 @@ class App extends React.Component {
   // )
 
   // I believe I should be able to use || (((or syntax))) here:
-  return (
-    this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
-      article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
-      article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
-    )
-  )
+  // return (
+  //   this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+  //     article.byline.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+  //     article.section.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+  //   )
+  // )
 //   **** articles must be filtered no matter the position of words
 // I believe that I would need actually take the searchTerm and .split the term to ensure that that both of the those words were included in the filter (probably using && in the second half of the filter statement)
-//  new array in state of search term spli - and then loop over all values of array
+//  new array in state of search term split - and then loop over all values of array
+    const filteredArticles = []
 
-  // for (let i = 0; i < this.state.searchTerms.length; i++) {
-  // // console.log(this.state.searchTerms[i])
-  //   return(
-  //     this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
-  //       article.byline.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
-  //       article.section.toLowerCase().includes(this.state.searchTerms[i].toLowerCase())
-  //     )
-  //   )
-  // }
-}
+    if (this.state.searchTerms.length > 0){
+      for (let i = 0; i < this.state.searchTerms.length; i++) {
+      // console.log(this.state.searchTerms[i])
+          filteredArticles.push (...this.state.articles.filter(article => article.title.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
+            article.byline.toLowerCase().includes(this.state.searchTerms[i].toLowerCase()) ||
+            article.section.toLowerCase().includes(this.state.searchTerms[i].toLowerCase())
+          ))
+      }
+      return filteredArticles
+    } else {
+      return this.state.articles
+    }
+  }
 
   render () {
     
     let newFilteredArticles = this.filteredArticles()
-// map over each article and render each to the dom in an <li>
+    // map over each article and render each to the dom in an <li>
     const articles = newFilteredArticles.map(article => 
       <li key={article.url}>
         <p><strong>Title:</strong><a href={article.url} > {article.title} </a></p>
